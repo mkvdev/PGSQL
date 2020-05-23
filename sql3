@@ -1,0 +1,77 @@
+JOINS / AS
+
+// INNER / OUTER / FULL / UNIONS / AS //
+
+[AS gets executed at the very end of a query./ we can not use ALIAS inside a WHERE op]
+
+SELECT SUM(amount) AS net_revenue
+FROM payment;
+
+
+SELECT customer_id, SUM(amount) AS total_spent
+FROM payment
+GROUP BY customer_id
+HAVING SUM(amount) > 100;
+[use the original column name for filtering !!!]
+
+
+SELECT * FROM Registrations
+INNER JOIN Logins
+ON Registrations.name = Logins.name;
+
+
+SELECT reg_id, Logins.name, log_id
+FROM Registrations
+INNER JOIN Logins
+ON Registrations.name = Logins.name;
+
+
+SELECT * FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer_id;
+
+
+SELECT payment_id, payment.customer_id, first_name
+FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer_id;
+
+FULL OUERT JOIN
+
+SELECT * FROM Registrations 
+FULL OUTER JOIN Logins
+ON Registrations.name = Logins.name
+WHERE Registrations.reg_id IS null OR
+Logins.log_id IS null;
+
+
+SELECT * FROM customer
+FULL OUTER JOIN payment
+ON customer.customer_id = payment.customer_id
+WHERE customer.customer_id IS null 
+OR payment.customer_id IS null;
+
+
+LEFT OUERT JOIN
+
+SELECT film.film_id, film.title, inventory_id
+FROM film
+LEFT OUTER JOIN inventory ON 
+inventory.film_id = film.film_id
+WHERE inventory.film_id IS NULL;
+
+RIGHT OUTER JOIN
+
+SELECT film.film_id, film.title, inventory_id
+FROM film
+RIGHT OUTER JOIN inventory ON 
+inventory.film_id = film.film_id
+WHERE inventory.film_id IS NULL;
+
+
+UNION
+
+SELECT * FROM sales2021_q1
+UNION
+SELECT * FROM sales2021_q2
+ORDER BY name;
