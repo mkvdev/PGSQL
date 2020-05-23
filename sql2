@@ -1,0 +1,50 @@
+GROUP BY / HAVING / Aggregation Functions [AVG() / COUNT() / MAX() / MIN() / SUM ()]  (Agg func only in SELECT or HAVING)
+
+SELECT MIN(replacement_cost) FROM film;
+
+SELECT MAX(replacement_cost) FROM film;
+
+SELECT MAX(replacement_cost), MIN(replacement_cost) FROM film;
+
+
+SELECT AVG(replacement_cost) FROM film    [19.980000000000]
+
+SELECT ROUND(AVG(replacement_cost),2) FROM film     [19.98]  ROUND decimal point
+
+SELECT SUM(replacement_cost) FROM film
+
+
+SELECT customer_id, COUNT(amount) FROM payment
+GROUP BY customer_id
+ORDER BY COUNT(amount) DESC;
+
+ELECT customer_id, staff_id, SUM(amount) FROM payment
+GROUP BY staff_id, customer_id
+ORDER BY customer_id;
+
+SELECT DATE(payment_date), SUM(amount) FROM payment
+GROUP BY DATE(payment_date)
+ORDER BY SUM(amount) DESC;
+
+
+
+
+HAVING  (filter after an aggregation)
+
+
+SELECT company, SUM(sales)
+FROM finance_table
+WHERE company !='Google'
+GROUP BY company
+HAVING SUM(sales) >1000
+[aggregate functions run after the WHERE clause/ HAVING allous us to use agg func as a filter along GROUP BY] 
+
+
+SELECT customer_id, COUNT(amount) FROM payment
+GROUP BY customer_id
+HAVING COUNT(amount) >= 40
+
+SELECT customer_id, SUM(amount) FROM payment
+WHERE staff_id =2
+GROUP BY customer_id
+HAVING SUM(amount) > 100
