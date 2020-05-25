@@ -1,0 +1,56 @@
+TIMESTAMP AND EXTRACT
+
+TIME/ DATE / TIMESTAMP / TIMESTAMPTZ
+
+TIMEZONE / NOW / TIMEOFDAY / CURRENT_TIME / CURRENT_DATE
+
+SHOW ALL
+
+SHOW TIMEZONE
+
+SELECT NOW()   [for current timestamp]
+
+SELECT TIMEOFDAY()
+
+SELECT CURRENT_TIME
+
+SELECT CURRENT_DATE
+
+
+
+
+EXTRACT() 
+
+EXTRACT(YEAR FROM date_col)
+
+AGE(date_col)  -- [calculate how old the timestamp is]
+
+TO_CHAR(date_col, 'mm-dd-yyyy')
+
+
+SELECT EXTRACT(YEAR FROM payment_date) AS myyear 
+FROM payment;
+
+SELECT EXTRACT(QUARTER FROM payment_date) AS myyear 
+FROM payment;
+
+SELECT AGE(payment_date)
+FROM payment;
+
+SELECT TO_CHAR(payment_date, 'MM/DD/YYYY')
+FROM payment;
+
+
+SELECT TO_CHAR(payment_date, 'dd/MM/YYYY')
+FROM payment;
+
+
+
+MATH: 
+
+SELECT ROUND(rental_rate/replacement_cost,2)*100 AS percent_cost 
+FROM film;
+
+
+SELECT 0.1 * replacement_cost AS deposit
+FROM film; 
