@@ -1,0 +1,77 @@
+Conditional Expressions and Procedures
+
+
+CASE:
+
+CASE
+ WHEN condition1 THEN result1
+ WHEN condition2 THEN result2
+ ELSE some_other_result
+END
+
+
+SELECT customer_id,
+CASE
+	WHEN (customer_id <= 100) THEN 'Premium'
+	WHEN (customer_id BETWEEN 100 and 200) THEN 'Plus'
+	ELSE 'Normal'
+END AS customer_class
+FROM customer
+
+
+
+
+COALESCE:
+
+SELECT COALESCE (1,2)
+-->1
+SELECT COALESCE(NULL,2,3)
+--->2
+
+
+
+CAST:
+
+SELECT CAST('5' AS INTEGER) AS new_int
+
+
+SLECT '5'::INTEGER
+
+
+
+NULLIF:
+
+SELECT (
+SUM(CASE WHEN department = 'A' THEN 1 ELSE 0 END)/
+NULLIF(SUM(CASE WHEN department = 'B' THEN 1 ELSE 0 END),0)
+
+
+
+
+VIEWS: [a stored query]
+
+CREATE VIEW customer_info AS
+SELECT first_name,last_name,address FROM customer
+INNER JOIN address
+ON customer.address_id = address.address_id
+
+SELECT * FROM customer_info
+
+
+CREATE OR REPLACE VIEW customer_info AS
+CREATE VIEW customer_info AS
+SELECT first_name,last_name,address,district FROM customer
+INNER JOIN address
+ON customer.address_id = address.address_id
+
+
+DROP VIEW customer_info
+
+DROP VIEW IF EXISTS customer_view
+
+ALTER VIEW customer_info RENAME TO c_info
+
+
+
+
+IMPORT and EXPORT [does not create a table for you] [.csv file]
